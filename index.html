@@ -1,0 +1,737 @@
+<head>
+    <link rel="icon" type="image/x-icon" href="favicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MGKK Clan Events</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: white;
+            min-height: 100vh;
+
+            background:
+                linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.75)),
+                url("background.png") center center / cover fixed no-repeat;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 50px 0;
+        }
+
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        header h1 {
+            font-size: 52px;
+            font-weight: 900;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            text-shadow: 0 0 20px rgba(255,255,255,0.4);
+        }
+
+        header p {
+            margin-top: 10px;
+            color: #aaa;
+            font-size: 18px;
+        }
+
+
+        .event {
+            background: rgba(15, 15, 15, 0.82);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 18px;
+            padding: 30px;
+            margin-bottom: 35px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            backdrop-filter: blur(8px);
+        }
+
+        .event-title {
+            font-size: 30px;
+            font-weight: 800;
+            margin-bottom: 25px;
+            color: #fff;
+        }
+
+
+        .podium {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 35px;
+        }
+
+        .place {
+            text-align: center;
+            padding: 25px 15px;
+            border-radius: 14px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: 0.25s;
+        }
+
+        .place:hover {
+            transform: translateY(-4px);
+            background: rgba(255,255,255,0.1);
+        }
+
+        .place-number {
+            font-size: 34px;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        .place-name {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .place-points {
+            margin-top: 7px;
+            color: #aaa;
+        }
+
+        .first {
+            border-color: rgba(255,215,0,0.5);
+        }
+
+        .first .place-number {
+            color: gold;
+        }
+
+        .second {
+            border-color: rgba(192,192,192,0.5);
+        }
+
+        .second .place-number {
+            color: silver;
+        }
+
+        .third {
+            border-color: rgba(205,127,50,0.5);
+        }
+
+        .third .place-number {
+            color: #cd7f32;
+        }
+
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+
+        .active-section {
+            margin-bottom: 35px;
+        }
+
+        .active-players {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 12px;
+        }
+
+        .active-player {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 16px 18px;
+
+            background: rgba(0, 200, 255, 0.10);
+            border: 1px solid rgba(0, 200, 255, 0.25);
+            border-radius: 12px;
+
+            transition: 0.25s;
+        }
+
+        .active-player:hover {
+            transform: translateY(-3px);
+            background: rgba(0, 200, 255, 0.16);
+        }
+
+        .active-name {
+            font-weight: 700;
+        }
+
+        .active-points {
+            color: #54d9ff;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .active-status {
+            font-size: 11px;
+            color: #54d9ff;
+            margin-left: 6px;
+        }
+
+
+        .inactive-section {
+            margin-top: 5px;
+        }
+
+        .players {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 10px;
+        }
+
+        .player {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 14px 16px;
+
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+
+            transition: 0.2s;
+        }
+
+        .player:hover {
+            background: rgba(255,255,255,0.08);
+        }
+
+        .player-name {
+            font-weight: 600;
+        }
+
+        .player-points {
+            color: #aaa;
+            font-weight: bold;
+        }
+
+        .zero {
+            color: #ff5c5c;
+        }
+
+
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            color: #777;
+            font-size: 14px;
+        }
+
+
+        @media (max-width: 700px) {
+
+            header h1 {
+                font-size: 34px;
+            }
+
+            .podium {
+                grid-template-columns: 1fr;
+            }
+
+            .event {
+                padding: 20px;
+            }
+
+            .active-player,
+            .player {
+                padding: 14px;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+    <header>
+        <h1>MGKK Clan Events</h1>
+        <p>Clan Event Results & Rankings</p>
+    </header>
+
+
+
+    <div class="event">
+
+        <div class="event-title">
+           LeaderBoard Points
+        </div>
+
+
+
+        <div class="podium">
+
+            <div class="place first">
+                <div class="place-number">#1</div>
+                <div class="place-name">Unknown User</div>
+                <div class="place-points">5.10M Points</div>
+            </div>
+
+
+            <div class="place second">
+                <div class="place-number">#2</div>
+                <div class="place-name">boy1077boy</div>
+                <div class="place-points">4.58M Points</div>
+            </div>
+
+
+            <div class="place third">
+                <div class="place-number">#3</div>
+                <div class="place-name">AlexBabadag12</div>
+                <div class="place-points">4.09M Points</div>
+            </div>
+
+        </div>
+
+
+
+        <div class="active-section">
+
+            <div class="section-title">
+                Active Players
+            </div>
+
+            <div class="active-players">
+
+                <div class="active-player">
+                    <span class="active-name">
+                        Roseey1234567891011
+                        <span class="active-status">● ACTIVE</span>
+                    </span>
+                    <span class="active-points">3.33M</span>
+                </div>
+
+                <div class="active-player">
+                    <span class="active-name">
+                        SkibidiPulsar
+                        <span class="active-status">● ACTIVE</span>
+                    </span>
+                    <span class="active-points">2.78M</span>
+                </div>
+
+                <div class="active-player">
+                    <span class="active-name">
+                        foreverg12g
+                        <span class="active-status">● ACTIVE</span>
+                    </span>
+                    <span class="active-points">2.12M</span>
+                </div>
+
+                <div class="active-player">
+                    <span class="active-name">
+                        BEZDAR_WWWW
+                        <span class="active-status">● ACTIVE</span>
+                    </span>
+                    <span class="active-points">1.90M</span>
+                </div>
+
+                <div class="active-player">
+                    <span class="active-name">
+                        COOLA1dM4N
+                        <span class="active-status">● ACTIVE</span>
+                    </span>
+                    <span class="active-points">1.61M</span>
+                </div>
+
+                <div class="active-player">
+                    <span class="active-name">
+                        caramelated
+                        <span class="active-status">● ACTIVE</span>
+                    </span>
+                    <span class="active-points">1.28M</span>
+                </div>
+
+                <div class="active-player">
+                    <span class="active-name">
+                        kytcats
+                        <span class="active-status">● ACTIVE</span>
+                    </span>
+                    <span class="active-points">948k</span>
+                </div>
+
+                <div class="active-player">
+                    <span class="active-name">
+                        XFarasx10
+                        <span class="active-status">● ACTIVE</span>
+                    </span>
+                    <span class="active-points">900k</span>
+                </div>
+
+                <div class="active-player">
+                    <span class="active-name">
+                        andr918
+                        <span class="active-status">● ACTIVE</span>
+                    </span>
+                    <span class="active-points">698k</span>
+                </div>
+
+                <div class="active-player">
+                    <span class="active-name">
+                        NotPhadeFarm2
+                        <span class="active-status">● ACTIVE</span>
+                    </span>
+                    <span class="active-points">533k</span>
+                </div>
+
+                <div class="active-player">
+                    <span class="active-name">
+                        Matheprofi123
+                        <span class="active-status">● ACTIVE</span>
+                    </span>
+                    <span class="active-points">503k</span>
+                </div>
+
+                <div class="active-player">
+                    <span class="active-name">
+                        Petru1076
+                        <span class="active-status">● ACTIVE</span>
+                    </span>
+                    <span class="active-points">484k</span>
+                </div>
+
+                <div class="active-player">
+                    <span class="active-name">
+                        Oceanicfright
+                        <span class="active-status">● ACTIVE</span>
+                    </span>
+                    <span class="active-points">446k</span>
+                </div>
+
+                <div class="active-player">
+                    <span class="active-name">
+                        legenhero9090
+                        <span class="active-status">● ACTIVE</span>
+                    </span>
+                    <span class="active-points">398k</span>
+                </div>
+
+                <div class="active-player">
+                    <span class="active-name">
+                        Fajnt99
+                        <span class="active-status">● ACTIVE</span>
+                    </span>
+                    <span class="active-points">368k</span>
+                </div>
+
+                <div class="active-player">
+                    <span class="active-name">
+                        kracx11
+                        <span class="active-status">● ACTIVE</span>
+                    </span>
+                    <span class="active-points">271k</span>
+                </div>
+
+                <div class="active-player">
+                    <span class="active-name">
+                        andrei_gaming2350
+                        <span class="active-status">● ACTIVE</span>
+                    </span>
+                    <span class="active-points">180k</span>
+                </div>
+
+                <div class="active-player">
+                    <span class="active-name">
+                        MisterTopXX
+                        <span class="active-status">● ACTIVE</span>
+                    </span>
+                    <span class="active-points">107k</span>
+                </div>
+
+                <div class="active-player">
+                    <span class="active-name">
+                        elisevayne11
+                        <span class="active-status">● ACTIVE</span>
+                    </span>
+                    <span class="active-points">107k</span>
+                </div>
+
+                <div class="active-player">
+                    <span class="active-name">
+                        andrei_bosul57
+                        <span class="active-status">● ACTIVE</span>
+                    </span>
+                    <span class="active-points">62.6k</span>
+                </div>
+
+                <div class="active-player">
+                    <span class="active-name">
+                        Ben20215c2
+                        <span class="active-status">● ACTIVE</span>
+                    </span>
+                    <span class="active-points">62.0k</span>
+                </div>
+
+                <div class="active-player">
+                    <span class="active-name">
+                        bullsriding101lol
+                        <span class="active-status">● ACTIVE</span>
+                    </span>
+                    <span class="active-points">32.5k</span>
+                </div>
+
+                <div class="active-player">
+                    <span class="active-name">
+                        Monsterjam_33
+                        <span class="active-status">● ACTIVE</span>
+                    </span>
+                    <span class="active-points">24.6k</span>
+                </div>
+
+                <div class="active-player">
+                    <span class="active-name">
+                        radan60
+                        <span class="active-status">● ACTIVE</span>
+                    </span>
+                    <span class="active-points">10.7k</span>
+                </div>
+
+                <div class="active-player">
+                    <span class="active-name">
+                        boy2077boy
+                        <span class="active-status">● ACTIVE</span>
+                    </span>
+                    <span class="active-points">9.20k</span>
+                </div>
+
+                <div class="active-player">
+                    <span class="active-name">
+                        AndreiCosminHagi
+                        <span class="active-status">● ACTIVE</span>
+                    </span>
+                    <span class="active-points">5.87k</span>
+                </div>
+
+                <div class="active-player">
+                    <span class="active-name">
+                        haimy9999
+                        <span class="active-status">● ACTIVE</span>
+                    </span>
+                    <span class="active-points">972</span>
+                </div>
+
+                <div class="active-player">
+                    <span class="active-name">
+                        Jonas_naruto101
+                        <span class="active-status">● ACTIVE</span>
+                    </span>
+                    <span class="active-points">805</span>
+                </div>
+
+                <div class="active-player">
+                    <span class="active-name">
+                        lironmiz09134
+                        <span class="active-status">● ACTIVE</span>
+                    </span>
+                    <span class="active-points">730</span>
+                </div>
+
+                <div class="active-player">
+                    <span class="active-name">
+                        DerKorrax
+                        <span class="active-status">● ACTIVE</span>
+                    </span>
+                    <span class="active-points">549</span>
+                </div>
+
+                <div class="active-player">
+                    <span class="active-name">
+                        darkgoldfim
+                        <span class="active-status">● ACTIVE</span>
+                    </span>
+                    <span class="active-points">234</span>
+                </div>
+
+                <div class="active-player">
+                    <span class="active-name">
+                        ElijahJay110
+                        <span class="active-status">● ACTIVE</span>
+                    </span>
+                    <span class="active-points">77</span>
+                </div>
+
+                <div class="active-player">
+                    <span class="active-name">
+                        300handrei_farm
+                        <span class="active-status">● ACTIVE</span>
+                    </span>
+                    <span class="active-points">52</span>
+                </div>
+
+                <div class="active-player">
+                    <span class="active-name">
+                        Hellro9
+                        <span class="active-status">● ACTIVE</span>
+                    </span>
+                    <span class="active-points">30</span>
+                </div>
+
+                <div class="active-player">
+                    <span class="active-name">
+                        broke2richinisland
+                        <span class="active-status">● ACTIVE</span>
+                    </span>
+                    <span class="active-points">3</span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="inactive-section">
+
+            <div class="section-title">
+                Inactive Players
+            </div>
+
+            <div class="players">
+
+                <div class="player">
+                    <span class="player-name">MonkeZ</span>
+                    <span class="player-points zero">0 ⭐</span>
+                </div>
+
+                <div class="player">
+                    <span class="player-name">Rares</span>
+                    <span class="player-points zero">0 ⭐</span>
+                </div>
+
+                <div class="player">
+                    <span class="player-name">Seth</span>
+                    <span class="player-points zero">0 ⭐</span>
+                </div>
+
+                <div class="player">
+                    <span class="player-name">Mocin</span>
+                    <span class="player-points zero">0 ⭐</span>
+                </div>
+
+                <div class="player">
+                    <span class="player-name">00_godzilla</span>
+                    <span class="player-points zero">0 ⭐</span>
+                </div>
+
+                <div class="player">
+                    <span class="player-name">Rowdy</span>
+                    <span class="player-points zero">0 ⭐</span>
+                </div>
+
+                <div class="player">
+                    <span class="player-name">ESC_Shadow</span>
+                    <span class="player-points zero">0 ⭐</span>
+                </div>
+
+                <div class="player">
+                    <span class="player-name">Adiemad10</span>
+                    <span class="player-points zero">0 ⭐</span>
+                </div>
+
+                <div class="player">
+                    <span class="player-name">Mew</span>
+                    <span class="player-points zero">0 ⭐</span>
+                </div>
+
+                <div class="player">
+                    <span class="player-name">Christinohuier</span>
+                    <span class="player-points zero">0 ⭐</span>
+                </div>
+
+                <div class="player">
+                    <span class="player-name">TERMINATOR</span>
+                    <span class="player-points zero">0 ⭐</span>
+                </div>
+
+                <div class="player">
+                    <span class="player-name">pchmngo</span>
+                    <span class="player-points zero">0 ⭐</span>
+                </div>
+
+                <div class="player">
+                    <span class="player-name">Xyk</span>
+                    <span class="player-points zero">0 ⭐</span>
+                </div>
+
+                <div class="player">
+                    <span class="player-name">Moon</span>
+                    <span class="player-points zero">0 ⭐</span>
+                </div>
+
+                <div class="player">
+                    <span class="player-name">ディオン</span>
+                    <span class="player-points zero">0 ⭐</span>
+                </div>
+
+                <div class="player">
+                    <span class="player-name">Gwn_hem</span>
+                    <span class="player-points zero">0 ⭐</span>
+                </div>
+
+                <div class="player">
+                    <span class="player-name">E4rth_miki</span>
+                    <span class="player-points zero">0 ⭐</span>
+                </div>
+
+                <div class="player">
+                    <span class="player-name">Sergej0219</span>
+                    <span class="player-points zero">0 ⭐</span>
+                </div>
+
+                <div class="player">
+                    <span class="player-name">jorey649</span>
+                    <span class="player-points zero">0 ⭐</span>
+                </div>
+
+                <div class="player">
+                    <span class="player-name">JesusTeAma</span>
+                    <span class="player-points zero">0 ⭐</span>
+                </div>
+
+                <div class="player">
+                    <span class="player-name">itzzKAPELLEK</span>
+                    <span class="player-points zero">0 ⭐</span>
+                </div>
+
+                <div class="player">
+                    <span class="player-name">Haris</span>
+                    <span class="player-points zero">0 ⭐</span>
+                </div>
+
+                <div class="player">
+                    <span class="player-name">Joe</span>
+                    <span class="player-points zero">0 ⭐</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <footer>
+        © 2026 MGKK Clan — Clan Events
+    </footer>
+
+</div>
+
+</body>
