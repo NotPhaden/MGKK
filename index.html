@@ -49,8 +49,45 @@
         }
 
 
-        .event {
-            background: rgba(15, 15, 15, 0.82);
+
+        .reward-banner {
+            position: relative;
+            overflow: hidden;
+            margin: 0 auto 35px;
+            padding: 26px 30px;
+            text-align: center;
+            border-radius: 18px;
+            background: linear-gradient(120deg, rgba(255, 190, 45, 0.20), rgba(0, 200, 255, 0.12));
+            border: 1px solid rgba(255, 215, 0, 0.42);
+            box-shadow: 0 12px 36px rgba(0,0,0,0.30);
+        }
+
+        .reward-banner h2 {
+            font-size: 25px;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            color: #ffd966;
+            text-transform: uppercase;
+        }
+
+        .reward-banner p {
+            font-size: 17px;
+            line-height: 1.6;
+            color: #f2f2f2;
+        }
+
+        .reward-highlight {
+            color: #54d9ff;
+            font-weight: 900;
+        }
+
+        .reward-banner .giveaway-line {
+            margin-top: 8px;
+            color: #ffffff;
+            font-weight: 800;
+        }
+
+        .event {            background: rgba(15, 15, 15, 0.82);
             border: 1px solid rgba(255,255,255,0.12);
             border-radius: 18px;
             padding: 30px;
@@ -268,6 +305,12 @@
     </header>
 
 
+
+    <div class="reward-banner">
+        <h2>🏆 Leaderboard Rewards 🏆</h2>
+        <p>The player who finishes <span class="reward-highlight">#1 in Points</span> will receive <span class="reward-highlight">2 Huges!</span></p>
+        <p class="giveaway-line">🎉 If we make the Top 250, we will host a giveaway! 🎉</p>
+    </div>
 
     <div class="event">
 
